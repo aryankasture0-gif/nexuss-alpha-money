@@ -14,5 +14,5 @@ function getSessionId() {
 
 export function trackEvent(eventType: 'page_view' | 'whatsapp_click' | 'phone_click' | 'form_started' | 'form_submitted', path = window.location.pathname) {
   const payload = JSON.stringify({ eventType, sessionId: getSessionId(), path, referrer: document.referrer, deviceType: window.innerWidth < 768 ? 'mobile' : 'desktop' });
-  void fetch('/.netlify/functions/track-event', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(() => undefined);
+  void fetch('/website-api/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(() => undefined);
 }

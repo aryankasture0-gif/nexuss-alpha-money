@@ -1,5 +1,9 @@
 # Netlify Deployment
 
+## Hostinger deployment note
+
+The current `.in` domain is served by the Hostinger VPS Caddy instance. The public website uses `/website-dashboard` and the isolated `/website-api/` service when deployed there. ERP routes remain `/login`, `/admin/*`, and `/api/v1/*`; do not replace or proxy those routes to the public site.
+
 This project is the clean replacement build for the existing Nexuss Alpha Money Netlify site. Replace the files inside the current Netlify-linked repository or manual deploy target; do not create a new Netlify site. The existing Netlify link stays the same.
 
 ## Required Environment Variables

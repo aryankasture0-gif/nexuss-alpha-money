@@ -115,7 +115,7 @@ export default function Apply() {
         return;
       }
 
-      const response = await fetch('/.netlify/functions/submit-application', {
+      const response = await fetch('/website-api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

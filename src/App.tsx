@@ -30,7 +30,7 @@ function App() {
   const loanSlug = path.startsWith('/loans/') ? path.replace('/loans/', '') : null;
   const guideSlug = path.startsWith('/guides/') ? path.replace('/guides/', '') : null;
 
-  if (path === '/admin' || path === '/admin/dashboard') return <AdminDashboard />;
+  if (path === '/website-dashboard' || path === '/website-dashboard/dashboard') return <AdminDashboard />;
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">

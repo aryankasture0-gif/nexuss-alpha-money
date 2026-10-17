@@ -16,7 +16,7 @@ export default function AdminDashboard() {
   const load = useCallback(async () => {
     if (!token) return setError('Enter your dashboard access token.');
     setLoading(true); setError('');
-    const response = await fetch('/.netlify/functions/dashboard-data', { headers: { Authorization: `Bearer ${token}` } });
+    const response = await fetch('/website-api/dashboard', { headers: { Authorization: `Bearer ${token}` } });
     const body = await response.json().catch(() => ({}));
     setLoading(false);
     if (!response.ok) return setError(body.error || 'Could not load dashboard.');
