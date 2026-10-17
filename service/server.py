@@ -93,4 +93,6 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json(201, {'ok': True})
         return self.send_json(404, {'error': 'Not found.'})
 
-ThreadingHTTPServer(('0.0.0.0', PORT), Handler).serve_forever()
+    # The reverse proxy reaches this service through the Docker bridge gateway.
+    # Avoid exposing the dashboard API directly on every VPS interface.
+ThreadingHTTPServer(('172.18.0.1', PORT), Handler).serve_forever()
