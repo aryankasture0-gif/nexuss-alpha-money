@@ -123,6 +123,7 @@ export default function Apply() {
           submittedAt,
           turnstileToken,
           consent: form.consent,
+          source: document.referrer || 'Direct',
         }),
       });
 

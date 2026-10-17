@@ -86,7 +86,7 @@ class Handler(BaseHTTPRequestHandler):
             if clean(body.get('website'), 120) or len(name) < 2 or not PHONE_RE.fullmatch(phone) or (email and not EMAIL_RE.fullmatch(email)) or body.get('consent') is not True:
                 return self.send_json(400, {'error': 'Please check your name, phone number, email and consent.'})
             created = now()
-            enquiry = {'id': secrets.token_hex(16), 'name': name, 'phone': phone, 'email': email or None, 'loan_type': clean(body.get('loanType'), 80), 'loan_amount': clean(body.get('amount'), 40) or None, 'applicant_profile': clean(body.get('profile'), 80) or None, 'requirement': requirement or None, 'status': 'NEW', 'created_at': created}
+            enquiry = {'id': secrets.token_hex(16), 'name': name, 'phone': phone, 'email': email or None, 'loan_type': clean(body.get('loanType'), 80), 'loan_amount': clean(body.get('amount'), 40) or None, 'applicant_profile': clean(body.get('profile'), 80) or None, 'requirement': requirement or None, 'source': clean(body.get('source'), 500) or 'Direct', 'status': 'NEW', 'created_at': created}
             event = {'id': secrets.token_hex(16), 'event_type': 'form_submitted', 'session_id': clean(body.get('sessionId'), 120) or 'anonymous', 'path': '/', 'referrer': None, 'device_type': clean(body.get('deviceType'), 30) or None, 'created_at': created}
             with LOCK:
                 data = read_data(); data['enquiries'].insert(0, enquiry); data['enquiries'] = data['enquiries'][:5000]; data['events'].append(event); data['events'] = data['events'][-50000:]; write_data(data)
