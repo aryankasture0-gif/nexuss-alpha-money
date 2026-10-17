@@ -63,6 +63,7 @@ function validatePayload(payload) {
   const profile = cleanText(payload.profile, 80);
   const requirement = cleanText(payload.requirement, 1000);
   const website = cleanText(payload.website, 120);
+  const consent = payload.consent === true;
 
   if (website) return { error: 'Spam check failed.' };
   if (!submittedAt || age < 2500) return { error: 'Please wait a moment before submitting.' };
@@ -71,6 +72,7 @@ function validatePayload(payload) {
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: 'Email address looks invalid.' };
   if (!LOAN_TYPES.has(loanType)) return { error: 'Please choose a valid loan type.' };
   if (!APPLICANT_PROFILES.has(profile)) return { error: 'Please choose a valid applicant profile.' };
+  if (!consent) return { error: 'Please agree to be contacted about this enquiry.' };
 
   return {
     data: {
@@ -81,6 +83,7 @@ function validatePayload(payload) {
       loan_amount: parseAmount(amount),
       applicant_profile: profile,
       requirement: requirement || null,
+      consent_given: true,
     },
   };
 }

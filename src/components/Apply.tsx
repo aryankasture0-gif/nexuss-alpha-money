@@ -21,6 +21,7 @@ const empty = {
   profile: APPLICANT_PROFILES[0],
   requirement: '',
   website: '',
+  consent: false,
 };
 
 export default function Apply() {
@@ -31,6 +32,7 @@ export default function Apply() {
   const [lastWhatsAppMessage, setLastWhatsAppMessage] = useState('');
   const [turnstileToken, setTurnstileToken] = useState('');
   const [submittedAt] = useState(() => Date.now());
+  const submittingRef = useRef(false);
   const turnstileRef = useRef<HTMLDivElement | null>(null);
   const turnstileWidgetRef = useRef<string>('');
 
@@ -61,7 +63,7 @@ export default function Apply() {
     document.head.appendChild(script);
   }, []);
 
-  const update = (key: keyof typeof form, value: string) => {
+  const update = (key: keyof typeof form, value: string | boolean) => {
     setForm((f) => ({ ...f, [key]: value }));
   };
 
@@ -76,6 +78,7 @@ export default function Apply() {
     if (!/^[\d\s+()-]{8,32}$/.test(phone)) return 'Phone number looks invalid.';
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'A valid email is required (or leave it blank).';
     if (requirement.length > 1000) return 'Requirement must be 1000 characters or less.';
+    if (!form.consent) return 'Please agree to be contacted about this enquiry.';
     if (turnstileSiteKey && !turnstileToken) return 'Please complete the security check.';
     return '';
   };
@@ -89,6 +92,7 @@ export default function Apply() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submittingRef.current) return;
     const err = validate();
     if (err) {
       setErrorMsg(err);
@@ -97,41 +101,52 @@ export default function Apply() {
     }
     setStatus('loading');
     setErrorMsg('');
+    setSuccessMsg('');
+    submittingRef.current = true;
 
     const waMessage = buildApplyWhatsAppMessage(form);
     setLastWhatsAppMessage(waMessage);
 
-    if (!turnstileSiteKey) {
+    try {
+      if (!turnstileSiteKey) {
+        window.open(whatsappLink(waMessage), '_blank', 'noopener,noreferrer');
+        setStatus('success');
+        setSuccessMsg('WhatsApp is opening with your details. Please tap send there so our team receives your loan enquiry.');
+        return;
+      }
+
+      const response = await fetch('/.netlify/functions/submit-application', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          submittedAt,
+          turnstileToken,
+          consent: form.consent,
+        }),
+      });
+
+      const result = (await response.json().catch(() => ({}))) as { error?: string };
+      if (!response.ok) {
+        setStatus('error');
+        setErrorMsg(result.error || 'Could not save your application right now. You can still send it via WhatsApp.');
+        resetTurnstile();
+        return;
+      }
+
       window.open(whatsappLink(waMessage), '_blank', 'noopener,noreferrer');
+
       setStatus('success');
-      setSuccessMsg('WhatsApp is opening with your details. Please tap send there so our team receives your loan enquiry.');
-      return;
-    }
-
-    const response = await fetch('/.netlify/functions/submit-application', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...form,
-        submittedAt,
-        turnstileToken,
-      }),
-    });
-
-    const result = (await response.json().catch(() => ({}))) as { error?: string };
-    if (!response.ok) {
-      setStatus('error');
-      setErrorMsg(result.error || 'Could not save your application right now. You can still send it via WhatsApp.');
+      setSuccessMsg("Application saved securely! WhatsApp is opening with your details. If it didn't open, tap the button below.");
+      setForm(empty);
       resetTurnstile();
-      return;
+    } catch {
+      setStatus('error');
+      setErrorMsg('We could not reach the enquiry service. Please try again or send the details through WhatsApp.');
+      resetTurnstile();
+    } finally {
+      submittingRef.current = false;
     }
-
-    window.open(whatsappLink(waMessage), '_blank', 'noopener,noreferrer');
-
-    setStatus('success');
-    setSuccessMsg("Application saved securely! WhatsApp is opening with your details. If it didn't open, tap the button below.");
-    setForm(empty);
-    resetTurnstile();
   };
 
   return (
@@ -170,8 +185,10 @@ export default function Apply() {
 
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label className="mb-2 block text-sm font-medium text-white/75">Full Name *</label>
+                <label htmlFor="apply-name" className="mb-2 block text-sm font-medium text-white/75">Full Name *</label>
                 <input
+                  id="apply-name"
+                  name="name"
                   type="text"
                   value={form.name}
                   onChange={(e) => update('name', e.target.value)}
@@ -181,19 +198,23 @@ export default function Apply() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-white/75">Phone Number *</label>
+                <label htmlFor="apply-phone" className="mb-2 block text-sm font-medium text-white/75">Phone Number *</label>
                 <input
+                  id="apply-phone"
+                  name="phone"
                   type="tel"
                   value={form.phone}
                   onChange={(e) => update('phone', e.target.value)}
-                  placeholder="+91 9922566893"
+                  placeholder="+91 9371735519"
                   className="input-lux"
                   required
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-white/75">Email</label>
+                <label htmlFor="apply-email" className="mb-2 block text-sm font-medium text-white/75">Email</label>
                 <input
+                  id="apply-email"
+                  name="email"
                   type="email"
                   value={form.email}
                   onChange={(e) => update('email', e.target.value)}
@@ -202,8 +223,10 @@ export default function Apply() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-white/75">Preferred Amount</label>
+                <label htmlFor="apply-amount" className="mb-2 block text-sm font-medium text-white/75">Preferred Amount</label>
                 <input
+                  id="apply-amount"
+                  name="amount"
                   type="text"
                   inputMode="numeric"
                   value={form.amount}
@@ -213,8 +236,10 @@ export default function Apply() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-white/75">Loan Type</label>
+                <label htmlFor="apply-loan-type" className="mb-2 block text-sm font-medium text-white/75">Loan Type</label>
                 <select
+                  id="apply-loan-type"
+                  name="loanType"
                   value={form.loanType}
                   onChange={(e) => update('loanType', e.target.value)}
                   className="input-lux appearance-none"
@@ -227,8 +252,10 @@ export default function Apply() {
                 </select>
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-white/75">Applicant Profile</label>
+                <label htmlFor="apply-profile" className="mb-2 block text-sm font-medium text-white/75">Applicant Profile</label>
                 <select
+                  id="apply-profile"
+                  name="profile"
                   value={form.profile}
                   onChange={(e) => update('profile', e.target.value)}
                   className="input-lux appearance-none"
@@ -243,8 +270,10 @@ export default function Apply() {
             </div>
 
             <div className="mt-5">
-              <label className="mb-2 block text-sm font-medium text-white/75">Requirement</label>
+              <label htmlFor="apply-requirement" className="mb-2 block text-sm font-medium text-white/75">Requirement</label>
               <textarea
+                id="apply-requirement"
+                name="requirement"
                 value={form.requirement}
                 onChange={(e) => update('requirement', e.target.value)}
                 rows={4}
@@ -254,20 +283,32 @@ export default function Apply() {
             </div>
 
             {turnstileSiteKey && (
-              <div className="mt-6">
+              <div className="mt-6" aria-label="Security check">
                 <div ref={turnstileRef} />
               </div>
             )}
 
+            <label className="mt-6 flex items-start gap-3 text-sm leading-relaxed text-white/60">
+              <input
+                type="checkbox"
+                checked={form.consent}
+                onChange={(e) => update('consent', e.target.checked)}
+                className="mt-1 h-4 w-4 accent-gold-400"
+              />
+              <span>
+                I agree to be contacted about this enquiry and understand that final eligibility, fees, rates, approval, and disbursal are decided by the lender.
+              </span>
+            </label>
+
             {status === 'error' && (
-              <div className="mt-5 flex items-center gap-2.5 rounded-2xl border border-error/30 bg-error/10 px-4 py-3 text-sm text-error">
+              <div role="alert" className="mt-5 flex items-center gap-2.5 rounded-2xl border border-error/30 bg-error/10 px-4 py-3 text-sm text-error">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 {errorMsg}
               </div>
             )}
 
             {status === 'success' && successMsg && (
-              <div className="mt-5 flex items-center gap-2.5 rounded-2xl border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
+              <div role="status" className="mt-5 flex items-center gap-2.5 rounded-2xl border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
                 <CheckCircle2 className="h-4 w-4 shrink-0" />
                 {successMsg}
               </div>
@@ -309,7 +350,7 @@ export default function Apply() {
             </div>
 
             <p className="mt-4 text-center text-xs text-white/35">
-              By submitting you agree to be contacted about your loan enquiry. Your data is handled securely and never shared.
+              Do not enter OTPs, passwords, PINs, or unnecessary sensitive information in this form. See our <a href="/privacy" className="text-gold-300 hover:text-gold-200">Privacy Policy</a>.
             </p>
           </form>
         </motion.div>

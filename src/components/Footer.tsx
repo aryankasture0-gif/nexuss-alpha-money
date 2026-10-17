@@ -41,7 +41,7 @@ export default function Footer() {
           <div>
             <a href="#top" className="group flex items-center gap-3">
               <img
-                src="/logo.jpeg"
+                src="/logo.png"
                 alt="Nexuss Alpha Money"
                 loading="lazy"
                 className="h-14 w-auto object-contain"
@@ -54,7 +54,7 @@ export default function Footer() {
               </span>
             </a>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/50">
-              {BRAND.tagline} Quick, transparent, and hassle-free loan services across India with 350+ bank and NBFC partners.
+              {BRAND.tagline} Loan assistance and consultancy across India, subject to lender availability and service coverage.
             </p>
             <div className="mt-6 space-y-3 text-sm text-white/55">
               <a href={`tel:${BRAND.phone.replace(/\s/g, '')}`} className="flex items-center gap-3 hover:text-gold-300 transition-colors">

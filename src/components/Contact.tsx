@@ -20,7 +20,7 @@ export default function Contact() {
       icon: MapPin,
       label: 'Location',
       value: BRAND.location,
-      href: 'https://maps.google.com/?q=Camp+Pune+Maharashtra',
+      href: 'https://maps.google.com/?q=Bheda+Chowk+Karad',
     },
     {
       icon: Clock,
@@ -41,7 +41,7 @@ export default function Contact() {
             Reach Nexuss Alpha <span className="text-gold-sheen">Money.</span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-white/55">
-            Prefer to talk first? Reach our advisory desk directly — we answer fast and keep your data secure.
+            Prefer to talk first? Reach our advisory desk directly. Share only what is needed for your enquiry, and never share OTPs or passwords.
           </p>
         </div>
 

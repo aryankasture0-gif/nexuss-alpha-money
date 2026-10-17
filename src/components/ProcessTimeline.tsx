@@ -22,7 +22,7 @@ export default function ProcessTimeline() {
             Simple <span className="text-gold-sheen">4-Step Process</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/50">
-            From application to disbursement, our streamlined process ensures quick and hassle-free loan processing.
+            From first enquiry to lender processing, each step depends on the information, documents, and policies involved.
           </p>
         </motion.div>
 

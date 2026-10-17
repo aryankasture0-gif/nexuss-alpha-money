@@ -9,6 +9,8 @@ Vite embeds `VITE_*` variables at build time. Server-only variables must be adde
 ```env
 SUPABASE_URL=your_supabase_project_url
 SUPABASE_SERVICE_ROLE_KEY=your_server_only_supabase_service_role_key
+TURNSTILE_SECRET_KEY=your_server_only_cloudflare_turnstile_secret_key
+DASHBOARD_ACCESS_TOKEN=generate_a_long_random_dashboard_token
 VITE_TURNSTILE_SITE_KEY=your_cloudflare_turnstile_site_key
 TURNSTILE_SECRET_KEY=your_server_only_cloudflare_turnstile_secret_key
 ```
@@ -48,6 +50,9 @@ If the variables are missing or still set to placeholders, the site will load no
 - Security headers are configured in `netlify.toml` and `public/_headers`.
 - HTTPS is managed by Netlify for the existing site domain, and HSTS is sent by this project after deployment.
 - The form submits through `/.netlify/functions/submit-application`, where Turnstile verification and server-side sanitization happen.
+- The private website dashboard is available at `/admin` after deployment. It requires the server-only `DASHBOARD_ACCESS_TOKEN` through the dashboard login and never exposes the Supabase service-role key to the browser.
+- Before enabling analytics, apply the migration `supabase/migrations/20261017090000_create_site_analytics.sql` to the intended Supabase project. The migration stores anonymous page/click events; names and emails remain in `contact_submissions` and are shown only for submitted enquiries.
+- The dashboard requires both the existing enquiry columns and the analytics table. Do not run the migration against the ERP database or an unverified Supabase project.
 - Keep Netlify deploy logs and environment variables private.
 
 ## Deploy Steps

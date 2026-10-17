@@ -11,7 +11,11 @@ const privacySections = [
   },
   {
     title: 'How We Use Information',
-    body: 'Submitted details are used to respond to your enquiry, understand loan requirements, and coordinate follow-up support. We do not sell personal information.',
+    body: 'Submitted details are used to respond to your enquiry, understand loan requirements, and coordinate follow-up support. We also collect limited anonymous page-view and button-click events to understand website performance. We do not sell personal information.',
+  },
+  {
+    title: 'Anonymous Website Analytics',
+    body: 'The website uses a random browser session identifier, page path, approximate device type, and referrer to count visits and improve the experience. This analytics data is not used to infer your name or email and is not linked to an enquiry unless you choose to submit the enquiry form.',
   },
   {
     title: 'Form Protection',
@@ -73,7 +77,7 @@ export default function LegalPage({ type }: LegalPageProps) {
           {title}
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/60">
-          Last updated: June 24, 2026. This page explains how {BRAND.name} handles website use,
+          Last updated: October 15, 2026. This page explains how {BRAND.name} handles website use,
           enquiries, and customer information.
         </p>
 

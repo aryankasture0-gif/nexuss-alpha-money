@@ -1,23 +1,22 @@
 export const BRAND = {
   name: 'Nexuss Alpha Money',
   shortName: 'Nexuss',
-  tagline: 'Smart Financing for Your Big Dreams.',
-  about: 'Nexuss Alpha Money is a trusted financial consultancy connecting individuals and businesses with 350+ banks and NBFCs across India. We provide expert guidance across 25+ loan categories, from personal loans and home financing to business funding, project finance, and specialized professional loans. Our mission is to make loan processing transparent, fast, and hassle-free for every customer.',
-  phone: '+91 9922566893',
-  phoneE164: '919922566893',
+  tagline: 'Clear guidance for your next financial step.',
+  about: 'Nexuss Alpha Money is a loan assistance and consultancy service. We help individuals and businesses understand available options, prepare their enquiry, and coordinate with relevant banks or NBFCs, subject to lender policies, eligibility, availability, and final approval by the lender.',
+  phone: '+91 9371735519',
+  phoneE164: '919371735519',
   email: 'nexussalphamoney@gmail.com',
-  location: 'Camp, Pune, Maharashtra, India',
+  location: 'Bheda Chowk, Karad · MG Road, Pune',
   copyright: '© 2026 Nexuss Alpha Money. All Rights Reserved.',
 };
 
 export const HIGHLIGHTS = [
-  'Fast document-led processing',
-  'Zero hidden charges',
-  'All-India loan support',
-  'Secure application handling',
-  'Transparent terms',
-  'Trusted customer guidance',
-  'Flexible repayment support',
+  'Clear enquiry and document guidance',
+  'Lender-dependent terms explained upfront',
+  'Support across India, subject to availability',
+  'Secure enquiry handling',
+  'No promise of approval or disbursal',
+  'Guidance for salaried and self-employed applicants',
 ];
 
 export type Service = {
@@ -81,32 +80,36 @@ export const DOCUMENTS = [
 
 export const PROCESS_STEPS = [
   { step: 'Step 1', title: 'Share Requirement', description: 'Tell us your loan requirement and goals — our advisors listen first.' },
-  { step: 'Step 2', title: 'Eligibility Review', description: 'We assess your profile and match you with the right loan options.' },
+  { step: 'Step 2', title: 'Initial Review', description: 'We review the information you provide and explain which options may be relevant.' },
   { step: 'Step 3', title: 'Document Check', description: 'Document-led processing with secure handling and clear checklists.' },
-  { step: 'Step 4', title: 'Processing Support', description: 'Dedicated support through processing until your loan moves forward.' },
+  { step: 'Step 4', title: 'Lender Processing', description: 'If you proceed, the selected lender evaluates the application and makes the final decision.' },
 ];
 
 export const FAQS = [
   {
     q: 'Is it safe to apply for a loan with Nexuss Alpha Money?',
-    a: 'Yes. Customer trust and data security are top priorities.',
+    a: 'We collect only the information needed for an enquiry and use reasonable safeguards for the form and submission flow. Please do not share OTPs, passwords, PINs, or unnecessary sensitive documents through public channels.',
   },
   {
     q: 'What types of loans are provided?',
-    a: 'Personal Loans, Business Loans, Home Loans, Mortgage Loans, Construction Loans, Agriculture Loans, Project Funding, Builder Funding, Hospital Funding, School Funding, Education Loans, Vehicle Loans, Car Loans, Used Car Loans, Subsidy Loans, Mahamandal Loans, Insurance support, and flexible credit solutions.',
+    a: 'We assist with enquiries for personal, business, home, property-backed, education, vehicle, agriculture, and selected project or specialty funding, subject to the availability and policies of relevant lenders.',
   },
   {
     q: 'How long does the approval process take?',
-    a: 'Once documentation is verified, the team works to process applications as quickly as possible.',
+    a: 'There is no guaranteed timeline. Processing depends on the lender, product, documentation, verification, and other case-specific factors.',
   },
   {
     q: 'Who is eligible to apply?',
-    a: 'Salaried and self-employed applicants with stable income and valid documentation may apply.',
+    a: 'Salaried, self-employed, and business applicants may submit an enquiry. The lender decides eligibility after its own assessment; the website checker is only an indicative guide.',
+  },
+  {
+    q: 'Are there any charges?',
+    a: 'Nexuss Alpha Money does not charge a customer service fee for submitting an enquiry. A lender, government authority, lawyer, valuator, or other third party may separately charge processing, legal, valuation, insurance, or other applicable fees. Confirm every charge before proceeding.',
   },
 ];
 
-export const HERO_HEADLINE = 'Get the Right Loan Solution with 350+ Bank & NBFC Partners';
-export const HERO_DESCRIPTION = 'Your trusted partner for all types of loans. Connect with 350+ banks and NBFCs across India for fast, secure, and hassle-free loan solutions tailored to your needs.';
+export const HERO_HEADLINE = 'Clear guidance for your next loan enquiry';
+export const HERO_DESCRIPTION = 'Nexuss Alpha Money helps you understand loan options, prepare your enquiry, and connect with relevant banks or NBFCs. Final eligibility, pricing, approval, and disbursal always depend on the lender.';
 
 export const TRUST_BADGES = [
   'PAN India Service',
@@ -116,11 +119,11 @@ export const TRUST_BADGES = [
 ];
 
 export const STATS = [
-  { label: 'Bank & NBFC Partners', value: 350, suffix: '+' },
-  { label: 'Loan Categories', value: 25, suffix: '+' },
-  { label: 'Customers Assisted', value: 5000, suffix: '+' },
-  { label: 'PAN India Service', value: 1, suffix: '', prefix: 'Nationwide', static: true },
-  { label: 'Fast Approval', value: 1, suffix: '', prefix: '24-48 Hours', static: true },
+  { label: 'Service model', value: 1, suffix: '', prefix: 'Guidance', static: true },
+  { label: 'Coverage', value: 1, suffix: '', prefix: 'India-wide*', static: true },
+  { label: 'Enquiry flow', value: 1, suffix: '', prefix: 'Private', static: true },
+  { label: 'Terms', value: 1, suffix: '', prefix: 'Lender-led', static: true },
+  { label: 'Approval', value: 1, suffix: '', prefix: 'No promise', static: true },
 ];
 
 export const LOAN_CATEGORIES = [
@@ -160,93 +163,54 @@ export const LOAN_PROCESS = [
   },
   {
     step: 2,
-    title: 'Document Verification',
-    description: 'Submit your documents securely. Our experts review and verify everything within hours.',
+    title: 'Document Guidance',
+    description: 'Share only the documents requested through an agreed channel. We help you understand what may be needed.',
     icon: 'ShieldCheck',
   },
   {
     step: 3,
     title: 'Bank Matching',
-    description: 'We match your profile with the best loan options from our 350+ bank and NBFC partner network.',
+    description: 'We discuss relevant lender options where available; no lender match or approval is guaranteed.',
     icon: 'Building2',
   },
   {
     step: 4,
-    title: 'Approval & Disbursement',
-    description: 'Get final approval and receive the funds directly in your bank account.',
+    title: 'Lender Decision',
+    description: 'The lender independently decides the terms, approval, documentation, and disbursal timeline.',
     icon: 'CircleDollarSign',
   },
 ];
 
 export const WHY_CHOOSE = [
   {
-    title: '350+ Banking Partners',
-    description: 'Access to an extensive network of banks and NBFCs ensuring the best loan options for your profile.',
+    title: 'Relevant lender guidance',
+    description: 'We help you understand suitable categories and next steps without promising a particular lender or outcome.',
     icon: 'Landmark',
   },
   {
-    title: 'Multiple Loan Options',
-    description: 'From personal loans to business financing, we cover 25+ loan categories to meet every need.',
+    title: 'Multiple loan categories',
+    description: 'Explore common personal, business, property, education, vehicle, agriculture, and project funding enquiries.',
     icon: 'LayoutGrid',
   },
   {
     title: 'PAN India Service',
-    description: 'Serving customers across all states in India with local support and regional expertise.',
+    description: 'Enquiries can be considered across India, subject to lender availability and service coverage.',
     icon: 'Globe',
   },
   {
-    title: 'Quick Documentation',
-    description: 'Simplified document requirements and fast verification process to get you approved sooner.',
+    title: 'Clear documentation',
+    description: 'Understand the next document step and avoid sharing unnecessary sensitive information.',
     icon: 'FileCheck',
   },
   {
     title: 'Expert Loan Guidance',
-    description: 'Dedicated loan advisors with years of experience to guide you through every step.',
+    description: 'A practical point of contact for your enquiry, documents, and lender-process questions.',
     icon: 'Users',
   },
   {
-    title: 'Transparent Process',
-    description: 'No hidden charges, no surprises. Complete transparency in rates, fees, and processing time.',
+    title: 'Transparent expectations',
+    description: 'We explain that rates, fees, timelines, eligibility, approval, and disbursal are lender-dependent.',
     icon: 'Eye',
-  },
-];
-
-export const TESTIMONIALS = [
-  {
-    name: 'Rahul Sharma',
-    location: 'Mumbai, Maharashtra',
-    text: 'Nexuss Alpha Money helped me get a personal loan at a great interest rate. The process was smooth and I received the funds within 3 days. Highly recommended!',
-    rating: 5,
-  },
-  {
-    name: 'Priya Patel',
-    location: 'Ahmedabad, Gujarat',
-    text: 'As a small business owner, I needed working capital urgently. Their team connected me with the right bank and the loan was disbursed in record time.',
-    rating: 5,
-  },
-  {
-    name: 'Amit Kumar',
-    location: 'Bangalore, Karnataka',
-    text: 'Excellent service for home loan processing. They handled all the paperwork and bank coordination. Got my dream home thanks to their guidance!',
-    rating: 5,
-  },
-  {
-    name: 'Dr. Sneha Gupta',
-    location: 'Delhi NCR',
-    text: 'The doctor loan process was seamless. Special rates and quick approval for medical professionals. The team was very professional throughout.',
-    rating: 5,
-  },
-  {
-    name: 'Vijay Mehta',
-    location: 'Pune, Maharashtra',
-    text: 'Used their balance transfer service for my existing home loan. Saved significantly on interest. The entire process was transparent and hassle-free.',
-    rating: 5,
-  },
-  {
-    name: 'Neha Desai',
-    location: 'Hyderabad, Telangana',
-    text: 'Education loan for my child\'s overseas studies was processed quickly. Their guidance on documentation was invaluable. Thank you Nexuss Alpha!',
-    rating: 5,
   },
 ];
 

@@ -167,7 +167,7 @@ export default function EMICalculator() {
             Know your number <span className="text-gold-sheen">before you commit.</span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-white/55">
-            Move the dials to see your monthly EMI, total interest, and total payable update in real time.
+            Move the dials to see an illustrative monthly EMI, total interest, and total payable estimate. Actual lender terms may differ.
           </p>
         </div>
 
@@ -293,7 +293,7 @@ export default function EMICalculator() {
                 rel="noopener noreferrer"
                 className="btn-gold mt-6 w-full"
               >
-                Apply with these terms <ArrowRight className="h-4 w-4" />
+                Start an enquiry with this estimate <ArrowRight className="h-4 w-4" />
               </a>
             )}
           </div>

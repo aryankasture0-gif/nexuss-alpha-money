@@ -22,7 +22,7 @@ export default function WhyChooseUs() {
             Trusted Partner for <span className="text-gold-sheen">Your Financial Goals</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/50">
-            With industry expertise, extensive banking partnerships, and customer-first approach, we make loan processing simple and transparent.
+            We make the enquiry journey easier to understand while keeping lender decisions, fees, and timelines clear.
           </p>
         </motion.div>
 

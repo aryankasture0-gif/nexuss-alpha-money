@@ -20,7 +20,7 @@ export default function EligibilityChecker() {
     }
 
     if (monthlyIncome < 20000) {
-      setResult({ status: 'ineligible', message: 'Minimum monthly income of ₹20,000 is required for loan eligibility.' });
+      setResult({ status: 'conditional', message: 'This basic checker cannot confirm eligibility. Some lenders may apply income thresholds, so an advisor will need to review your profile.' });
       return;
     }
 
@@ -30,17 +30,17 @@ export default function EligibilityChecker() {
     }
 
     if (employment === 'salaried' && monthlyIncome >= 25000) {
-      setResult({ status: 'eligible', message: 'Congratulations! You are eligible for a loan. Our advisors will contact you with the best options from 350+ partners.' });
+      setResult({ status: 'eligible', message: 'Your information meets this basic indicative check. This is not approval; the lender must independently assess your documents and eligibility.' });
       return;
     }
 
     if (employment === 'self-employed' && monthlyIncome >= 40000) {
-      setResult({ status: 'eligible', message: 'Congratulations! You are eligible for a business loan. Our team will connect you with the right banking partners.' });
+      setResult({ status: 'eligible', message: 'Your information meets this basic indicative check for a business enquiry. This is not approval; the lender decides after its own assessment.' });
       return;
     }
 
     if (employment === 'business' && monthlyIncome >= 50000) {
-      setResult({ status: 'eligible', message: 'Congratulations! Your business profile qualifies for a loan. We will match you with the best NBFC partners.' });
+      setResult({ status: 'eligible', message: 'Your information meets this basic indicative check. Final terms, eligibility, approval, and disbursal depend on the lender.' });
       return;
     }
 
@@ -68,7 +68,7 @@ export default function EligibilityChecker() {
             Check Your <span className="text-gold-sheen">Loan Eligibility</span>
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-white/55">
-            Enter your details below and get instant eligibility feedback. No paperwork required.
+            Enter your details below for an indicative check. This does not guarantee eligibility, approval, rates, or disbursal.
           </p>
         </motion.div>
 

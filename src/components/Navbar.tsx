@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 const links = [
   { label: 'About', href: '#about' },
   { label: 'Loans', href: '#loan-categories' },
+  { label: 'Areas', href: '#service-areas' },
   { label: 'Process', href: '#process' },
   { label: 'Why Us', href: '#why-us' },
   { label: 'FAQ', href: '#faq' },
@@ -40,7 +41,7 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <a href="#top" className="group flex items-center gap-3" onClick={() => handleNav('#top')}>
           <img
-            src="/logo.jpeg"
+            src="/logo.png"
             alt="Nexuss Alpha Money"
             loading="eager"
             className="h-[70px] w-auto object-contain drop-shadow-lg"

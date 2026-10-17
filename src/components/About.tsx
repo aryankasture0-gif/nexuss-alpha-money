@@ -4,8 +4,8 @@ import { BRAND, HIGHLIGHTS } from '../lib/site';
 
 const pillars = [
   { icon: ShieldCheck, title: 'Secure & Trusted', description: 'Secure application handling with customer trust as a top priority.' },
-  { icon: IndianRupee, title: 'Zero Hidden Charges', description: 'Transparent terms with no hidden costs across every loan type.' },
-  { icon: Globe2, title: 'All-India Support', description: 'Loan guidance available across India with all-region support.' },
+  { icon: IndianRupee, title: 'Clear cost conversations', description: 'We explain that lender, government, legal, valuation, insurance, or other third-party charges may apply.' },
+  { icon: Globe2, title: 'India-wide enquiries', description: 'Support is available across India subject to lender availability and service coverage.' },
   { icon: Users, title: 'Customer Guidance', description: 'Trusted advisors guiding you from requirement to processing.' },
 ];
 

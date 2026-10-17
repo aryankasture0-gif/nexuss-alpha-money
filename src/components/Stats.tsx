@@ -1,41 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Landmark, Layers, Users, Globe, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ShieldCheck, Globe, LockKeyhole, Landmark, CircleSlash } from 'lucide-react';
 import { STATS } from '../lib/site';
 
-function AnimatedCounter({ value, suffix = '', prefix }: { value: number; suffix?: string; prefix?: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
-
-  useEffect(() => {
-    if (!isInView) return;
-    const duration = 2000;
-    const startTime = performance.now();
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(value * ease));
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-  }, [isInView, value]);
-
-  return (
-    <span ref={ref} className="font-display text-4xl font-bold text-gold-sheen sm:text-5xl">
-      {prefix ? prefix : count.toLocaleString()}
-      {suffix && !prefix && suffix}
-    </span>
-  );
-}
-
-const iconMap: Record<string, typeof Landmark> = {
-  'Bank & NBFC Partners': Landmark,
-  'Loan Categories': Layers,
-  'Customers Assisted': Users,
-  'PAN India Service': Globe,
-  'Fast Approval': Clock,
+const iconMap: Record<string, typeof ShieldCheck> = {
+  'Service model': ShieldCheck,
+  Coverage: Globe,
+  'Enquiry flow': LockKeyhole,
+  Terms: Landmark,
+  Approval: CircleSlash,
 };
 
 export default function Stats() {
@@ -51,7 +23,7 @@ export default function Stats() {
         >
           <span className="section-label mb-3">Our Impact</span>
           <h2 className="mt-4 font-display text-3xl font-bold text-white sm:text-4xl">
-            Numbers That Speak <span className="text-gold-sheen">Trust</span>
+          What you can <span className="text-gold-sheen">expect</span>
           </h2>
         </motion.div>
 
@@ -70,11 +42,7 @@ export default function Stats() {
                 <div className="icon-gold mb-4">
                   <Icon className="h-6 w-6" />
                 </div>
-                <AnimatedCounter
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  prefix={stat.prefix}
-                />
+                <span className="font-display text-3xl font-bold text-gold-sheen sm:text-4xl">{stat.prefix}</span>
                 <div className="mt-2 text-sm font-medium text-white/50">{stat.label}</div>
               </motion.div>
             );

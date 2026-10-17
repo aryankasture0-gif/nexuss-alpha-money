@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react';
 import { ShieldCheck, Globe, Banknote, BadgeCheck, ArrowRight, Phone } from 'lucide-react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { HERO_HEADLINE, HERO_DESCRIPTION, TRUST_BADGES, whatsappLink } from '../lib/site';
 
 function TrustBadge({ icon: Icon, text }: { icon: typeof ShieldCheck; text: string }) {
@@ -19,29 +18,6 @@ function TrustBadge({ icon: Icon, text }: { icon: typeof ShieldCheck; text: stri
 }
 
 export default function Hero() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
-
-  useEffect(() => {
-    if (isInView) {
-      const countElements = document.querySelectorAll('.hero-count');
-      countElements.forEach((el) => {
-        const target = parseInt(el.getAttribute('data-target') || '0', 10);
-        const duration = 2000;
-        const start = 0;
-        const startTime = performance.now();
-        const animate = (currentTime: number) => {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const ease = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.floor(start + (target - start) * ease).toString();
-          if (progress < 1) requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
-      });
-    }
-  }, [isInView]);
-
   const handleNav = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -64,7 +40,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-gold-500/[0.08] px-5 py-2 text-sm font-medium text-gold-300"
             >
               <BadgeCheck className="h-4 w-4" />
-              Trusted by 5,000+ customers across India
+              Loan guidance with clear expectations
             </motion.div>
 
             <motion.h1
@@ -74,7 +50,7 @@ export default function Hero() {
               className="font-display text-4xl font-bold leading-[1.15] text-white sm:text-5xl lg:text-[3.6rem]"
             >
               {HERO_HEADLINE.split(' ').map((word, i) => {
-                if (['Right', 'Loan', 'Solution', '350+', 'Bank', 'NBFC', 'Partners'].includes(word)) {
+                if (['guidance', 'loan', 'enquiry'].includes(word.toLowerCase())) {
                   return <span key={i} className="text-gold-sheen">{word} </span>;
                 }
                 return <span key={i}>{word} </span>;
@@ -113,6 +89,9 @@ export default function Hero() {
                 <Phone className="h-4 w-4" />
                 WhatsApp Us
               </a>
+              <button onClick={() => handleNav('#eligibility')} className="btn-secondary sm:order-3">
+                Check Eligibility
+              </button>
             </motion.div>
 
             <motion.div
@@ -127,7 +106,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <div ref={ref} className="relative">
+          <div className="relative">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -135,10 +114,10 @@ export default function Hero() {
               className="relative grid gap-5 sm:grid-cols-2"
             >
               {[
-                { value: 350, label: 'Bank & NBFC Partners', suffix: '+' },
-                { value: 25, label: 'Loan Categories', suffix: '+' },
-                { value: 5000, label: 'Customers Assisted', suffix: '+' },
-                { value: 1, label: 'Fast Approval', suffix: '', prefix: '24-48h' },
+                { label: 'Service model', prefix: 'Guidance' },
+                { label: 'Coverage', prefix: 'India-wide*' },
+                { label: 'Enquiry flow', prefix: 'Private' },
+                { label: 'Decision', prefix: 'Lender-led' },
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -148,16 +127,7 @@ export default function Hero() {
                   className="card-premium p-6 text-center sm:text-left"
                 >
                   <div className="mb-2 font-display text-3xl font-bold text-gold-sheen sm:text-4xl">
-                    {stat.prefix ? (
-                      <span className="text-gold-sheen">{stat.prefix}</span>
-                    ) : (
-                      <span className="hero-count" data-target={stat.value}>
-                        0
-                      </span>
-                    )}
-                    {stat.suffix && !stat.prefix && (
-                      <span className="text-gold-sheen">{stat.suffix}</span>
-                    )}
+                    <span className="text-gold-sheen">{stat.prefix}</span>
                   </div>
                   <div className="text-sm font-medium text-white/50">{stat.label}</div>
                 </motion.div>
