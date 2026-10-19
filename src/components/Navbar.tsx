@@ -41,16 +41,16 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <a href="#top" className="group flex items-center gap-3" onClick={() => handleNav('#top')}>
           <img
-            src="/logo.png"
+            src="/logo-transparent.png"
             alt="Nexuss Alpha Money"
             loading="eager"
-            className="h-[70px] w-auto object-contain drop-shadow-lg"
+            className="h-[78px] w-[98px] object-contain drop-shadow-[0_5px_18px_rgba(212,167,71,0.28)] sm:h-[86px] sm:w-[108px]"
           />
           <span className="flex flex-col leading-none">
-            <span className="font-display text-xl font-semibold tracking-wide text-white">
-              Nexuss <span className="text-gold-sheen">Alpha Money</span>
+            <span className="font-display text-[1.35rem] font-semibold tracking-wide text-white sm:text-2xl">
+              Nexuss <span className="text-gold-300">Alpha Money</span>
             </span>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">Smart Financing</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-white/55">Smart Financing</span>
           </span>
         </a>
 
