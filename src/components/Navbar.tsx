@@ -44,13 +44,13 @@ export default function Navbar() {
             src="/logo-transparent.png"
             alt="Nexuss Alpha Money"
             loading="eager"
-            className="h-[78px] w-[98px] object-contain drop-shadow-[0_5px_18px_rgba(212,167,71,0.28)] sm:h-[86px] sm:w-[108px]"
+            className="h-[82px] w-[104px] shrink-0 object-contain drop-shadow-[0_5px_18px_rgba(212,167,71,0.35)] sm:h-[92px] sm:w-[118px]"
           />
           <span className="flex flex-col leading-none">
-            <span className="font-display text-[1.35rem] font-semibold tracking-wide text-white sm:text-2xl">
-              Nexuss <span className="text-gold-300">Alpha Money</span>
+          <span className="font-display text-[1.5rem] font-bold tracking-wide text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.22)] sm:text-[2rem] lg:text-[2.2rem]">
+              Nexuss <span className="text-gold-200 drop-shadow-[0_2px_10px_rgba(246,190,62,0.35)]">Alpha Money</span>
             </span>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-white/55">Smart Financing</span>
+            <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.34em] text-white/70 sm:text-xs">Smart Financing</span>
           </span>
         </a>
 
